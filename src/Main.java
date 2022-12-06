@@ -8,7 +8,7 @@ public class Main {
         System.out.println(test.getPosition() + " is " + test.getSymbol());
         Chess game = new Chess();
         game.display();
-
+        game.move();
     }
 
 
