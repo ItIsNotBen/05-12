@@ -9,11 +9,20 @@ public class King extends Piece{
     }
     // Kings can move in one square any direction
     public boolean isValidMove(String targetPosition) {
-        // First you need to find out what chosen position is
-        int row  = targetPosition.indexOf(0);
-        int column = targetPosition.indexOf(1);
-        // Then you need to check if its within the correct distance (within 1 square)
-        if (row = )
-
+        // First you need to find out what original and chosen position is
+        int startRow  = ChessUtils.getRowFromPosition(getPosition());
+        int startColumn = ChessUtils.getColumnFromPosition(getPosition());
+        int targetRow = ChessUtils.getRowFromPosition(targetPosition);
+        int targetColumn = ChessUtils.getColumnFromPosition(targetPosition);
+        // can't stand still
+        if (targetRow == startRow && targetColumn == startColumn) {
+            return false;
+        }
+        // can't move more than one square in any direction
+        if (Math.abs(startRow - targetRow) > 1) {
+            return false;
+        }
+        // otherwise we're cool
+        return true;
     }
 }

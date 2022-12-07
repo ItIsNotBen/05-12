@@ -11,17 +11,17 @@ public class ChessUtils {
     public static int getColumnFromPosition(String p) {
         char colChar = p.toCharArray()[0]; // "A8" goes to A
         int asciiValue = colChar;
-        int colNumber = asciiValue - (int)'A'; // A goes to 0
+        int colNumber = asciiValue - (int) 'A'; // A goes to 0
         return colNumber;
-
-    // e.g. 0 goes to A, 1 goes to B, etc.
-   public static String columnToLetter(int c) {
-        char letter = (char)('A' + c);
-        return Character.toString(letter);
     }
+        // e.g. 0 goes to A, 1 goes to B, etc.
+        public static String columnToLetter ( int c){
+            char letter = (char) ('A' + c);
+            return Character.toString(letter);
+        }
 
-    // e.g. 0 goes to "1"
-    public static String rowToNumber(int r) {
-        return Integer.toString(r+1);
+        // e.g. 0 goes to "1"
+        public static String rowToNumber ( int r){
+            return Integer.toString(r + 1);
+        }
     }
-}

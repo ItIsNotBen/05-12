@@ -30,6 +30,13 @@ public class Piece {
         return ChessUtils.columnToLetter(column) + ChessUtils.rowToNumber(row);
     }
 
+    // set a new position for the piece
+    public void setPosition(String newPosition) {
+        // change the strings to characters and ints
+        row = newPosition.charAt(0);
+        column = Integer.parseInt(String.valueOf(1));
+    }
+
     public boolean isValidMove(String position) {
         return true;
     }
