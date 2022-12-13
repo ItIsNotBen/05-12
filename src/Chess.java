@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Chess {
@@ -7,13 +8,22 @@ public class Chess {
 
     public Chess() {
         board = new Piece[8][8];
-        // create the pawns
+        // create the 'pawns'
         for (int c = 0; c < 8; c++) {
             board[1][c] = new Piece(1, c, false);
             board[6][c] = new Piece(6, c, true);
 
         }
         board[0][4] = new King("E1", false);
+        board[7][4] = new King("E7", true);
+        board[0][1] = new Knight("B1", false);
+        board[0][6] = new Knight("G1", false);
+        board[7][1] = new Knight("B8", false);
+        board[7][6] = new Rook("G8", false);
+        board[0][0] = new Rook("A1", false);
+        board[0][8] = new Rook("H1", false);
+        board[7][1] = new Rook("H8", false);
+        board[7][6] = new Rook("G8", false);
     }
 
     // print the current board layout
@@ -50,6 +60,8 @@ public class Chess {
         if (toMove != null) {
             validMove = toMove.isValidMove(endPosition);
             if (validMove) {
+                // check there are no pieces along the route
+                ArrayList<String> squares = toMove.passesThrough(endPosition);
                 System.out.println(toMove.getSymbol() + " moves to " + endPosition);
                 // convert position to row and column
                 int startRow = ChessUtils.getRowFromPosition(startPosition);

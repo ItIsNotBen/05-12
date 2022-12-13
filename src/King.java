@@ -1,5 +1,6 @@
-public class King extends Piece{
+public class King extends Piece {
     private boolean inCheck;
+    private boolean hasCastled;
 
 
     public King(String position, boolean isBlack) {
@@ -7,22 +8,26 @@ public class King extends Piece{
         symbol = 'K';
         inCheck = false;
     }
+
     // Kings can move in one square any direction
     public boolean isValidMove(String targetPosition) {
-        // First you need to find out what original and chosen position is
-        int startRow  = ChessUtils.getRowFromPosition(getPosition());
-        int startColumn = ChessUtils.getColumnFromPosition(getPosition());
-        int targetRow = ChessUtils.getRowFromPosition(targetPosition);
-        int targetColumn = ChessUtils.getColumnFromPosition(targetPosition);
-        // can't stand still
-        if (targetRow == startRow && targetColumn == startColumn) {
+        if (super.isValidMove(targetPosition) == false) {
             return false;
         }
-        // can't move more than one square in any direction
-        if (Math.abs(startRow - targetRow) > 1) {
-            return false;
+            // First you need to find out what original and chosen position is
+            int startRow = ChessUtils.getRowFromPosition(getPosition());
+            int startColumn = ChessUtils.getColumnFromPosition(getPosition());
+            int targetRow = ChessUtils.getRowFromPosition(targetPosition);
+            int targetColumn = ChessUtils.getColumnFromPosition(targetPosition);
+
+            // can't move more than one square in any direction
+            if (Math.abs(startRow - targetRow) > 1) {
+                return false;
+            }
+            if (Math.abs(startColumn - targetColumn) > 1) {
+                return false;
+            }
+            // otherwise we're cool
+            return true;
         }
-        // otherwise we're cool
-        return true;
     }
-}
