@@ -35,6 +35,7 @@ public class Rook extends Piece {
         int targetColumn = ChessUtils.getColumnFromPosition(targetPosition);
 
         ArrayList<String> squares = new ArrayList<>();
+        // add all squares along the route, including the start sqaure for now
         if (isValidMove(targetPosition)) {
             int row = startRow;
             do {

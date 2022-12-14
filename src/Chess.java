@@ -14,16 +14,15 @@ public class Chess {
             board[6][c] = new Piece(6, c, true);
 
         }
-        board[0][4] = new King("E1", false);
-        board[7][4] = new King("E7", true);
-        board[0][1] = new Knight("B1", false);
-        board[0][6] = new Knight("G1", false);
-        board[7][1] = new Knight("B8", false);
-        board[7][6] = new Rook("G8", false);
-        board[0][0] = new Rook("A1", false);
-        board[0][8] = new Rook("H1", false);
-        board[7][1] = new Rook("H8", false);
-        board[7][6] = new Rook("G8", false);
+        board[0][4] = new King("E1",false);
+        board[7][4] = new King("E8",true);
+        board[0][1] = new Knight("B1",false);
+        board[0][6] = new Knight("G1",false);
+        board[7][1] = new Knight("B8",true);
+        board[7][6] = new Knight("G8",true);
+        board[0][0] = new Rook("A1",false);
+        board[0][7] = new Rook("H1",false);
+        board[7][0] = new Rook("A8",true);
     }
 
     // print the current board layout
@@ -32,13 +31,17 @@ public class Chess {
             for (int c = 0; c < 8; c++) {
                 if (board[r][c] != null) {
                     System.out.print(board[r][c].getSymbol() + " ");
+
                 } else {
                     System.out.print(" "); // print blank space
                 }
+                int pos = board[r][c]
+                System.out.println("Row number: " + ChessUtils.rowToNumber(board[r]));
+                System.out.println("Column number: " + ChessUtils.columnToLetter());
             }
-
             System.out.println(); // start a new row
         }
+
     }
 
     // takes ches coordinates e.g. A8 and returns that as loc or null
@@ -60,9 +63,16 @@ public class Chess {
         if (toMove != null) {
             validMove = toMove.isValidMove(endPosition);
             if (validMove) {
+                System.out.print(toMove.getSymbol() + " moves to " + endPosition);
                 // check there are no pieces along the route
                 ArrayList<String> squares = toMove.passesThrough(endPosition);
-                System.out.println(toMove.getSymbol() + " moves to " + endPosition);
+                if (squares.size()>0) {
+                    System.out.print(" passing through ");
+                    for (String p : squares) {
+                        System.out.print(p + ", ");
+                    }
+                }
+                System.out.println();;
                 // convert position to row and column
                 int startRow = ChessUtils.getRowFromPosition(startPosition);
                 int startColumn = ChessUtils.getColumnFromPosition(startPosition);
